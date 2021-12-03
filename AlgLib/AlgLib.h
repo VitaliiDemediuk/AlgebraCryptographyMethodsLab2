@@ -20,6 +20,10 @@ namespace alglib {
     al::BigInt legendre(const al::BigInt& a, const al::BigInt& p);
     al::BigInt jacobi(const al::BigInt& a, const al::BigInt& p);
 
+    auto cipolla(al::BigInt a, al::BigInt p, int countRetry = 10) -> std::pair<al::BigInt, al::BigInt>;
+
+    bool testPrimeMillerRabin(const al::BigInt& a, size_t nIt = 10);
+
 }
 
 #endif //ALGLIB_H

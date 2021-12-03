@@ -5,8 +5,10 @@ add_library(AlgLib)
 target_sources(AlgLib
         PRIVATE
         AlgLib.cpp
+        ElGamal.cpp
         PUBLIC
         AlgLib.h
+        ElGamal.h
         )
 
 target_include_directories(AlgLib
