@@ -16,6 +16,10 @@ namespace alglib {
     al::BigInt euler(const al::BigInt& n);
     al::BigInt mobius(const al::BigInt& n);
 
+    /// undefined behavior if p is not prime number
+    al::BigInt legendre(const al::BigInt& a, const al::BigInt& p);
+    al::BigInt jacobi(const al::BigInt& a, const al::BigInt& p);
+
 }
 
 #endif //ALGLIB_H

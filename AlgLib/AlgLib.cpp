@@ -97,3 +97,15 @@ al::BigInt alglib::mobius(const al::BigInt& n) {
     }
     return fact.size() % 2 == 0 ? 1 : -1;
 }
+
+al::BigInt alglib::legendre(const al::BigInt& a, const al::BigInt& p) {
+    return al::powMod(a, (p-1)/2, p);
+}
+
+al::BigInt alglib::jacobi(const al::BigInt& a, const al::BigInt& p) {
+    al::BigInt res{1};
+    for (const auto& [pi, count] : pollardRhoFactorisation(p)) {
+        res *= al::pow(alglib::legendre(a, pi), count);
+    }
+    return res;
+}
