@@ -37,16 +37,18 @@ al::BigInt alglib::pollardRhoDivision(const al::BigInt &n, size_t nIt) {
     return g;
 }
 
-std::vector<al::BigInt> alglib::pollardRhoFactorisation(const al::BigInt& n, size_t nIt) {
+auto alglib::pollardRhoFactorisation(const al::BigInt& n, size_t nIt) -> std::map<al::BigInt, al::BigInt> {
     auto nCopy = n;
-    std::vector<al::BigInt> res;
+    std::map<al::BigInt, al::BigInt> res;
     al::BigInt p = pollardRhoDivision(nCopy, nIt);
     while (p != 1) {
-        res.push_back(p);
+        ++res[p];
         nCopy /= p;
         p = pollardRhoDivision(nCopy, nIt);
     }
-    res.push_back(nCopy);
+    if (nCopy != 1) {
+        ++res[nCopy];
+    }
     return res;
 }
 
@@ -77,3 +79,16 @@ al::BigInt alglib::babyStepGiantStepLog(const al::BigInt& a,
     return -1;
 }
 
+al::BigInt alglib::euler(const al::BigInt& n) {
+    al::BigInt res{1};
+    for (const auto& [p, count] : pollardRhoFactorisation(n)) {
+        res *= al::pow(p-1, count);
+    }
+    return res;
+}
+
+al::BigInt alglib::mobius(const al::BigInt& n) {
+    al::BigInt res{1};
+    // re
+    return res;
+}
