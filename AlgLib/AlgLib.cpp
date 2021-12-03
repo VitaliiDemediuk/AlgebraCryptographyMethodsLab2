@@ -88,7 +88,12 @@ al::BigInt alglib::euler(const al::BigInt& n) {
 }
 
 al::BigInt alglib::mobius(const al::BigInt& n) {
-    al::BigInt res{1};
-    // re
-    return res;
+    if (n == 1) { return 1; }
+    auto fact = alglib::pollardRhoFactorisation(n);
+    for (const auto& [p, count] : fact) {
+        if (count > 1) {
+            return 0;
+        }
+    }
+    return fact.size() % 2 == 0 ? 1 : -1;
 }
